@@ -1,22 +1,32 @@
-import {
-    GoogleGenAI,
-  } from '@google/genai';
-  
-  async function main() {
-    const ai = new GoogleGenAI({
-      apiKey: process.env.NEXT_PUBLIC_GEMINI_API,
-    });
-    const config = {
-      responseMimeType: 'application/json',
-    };
-    const model = 'gemini-1.5-flash';
-    const prompt = `act as an intelligent 20-questions game bot for kids.\nThe user wants you to guess a character by asking simple yes/no/maybe/i don't know questions.\nUser has selected:\nMain category: {mainCategory}\nSubcategory: {subCategory}\nprofession: {profession}\n-specific group: {specificGroup}\nAsk your next question to help narrow down who the person might be.\nUse simple language. One question at a time. your dataset for guessing should be indian oriented and a group of famous personalities from the world.\nafter the 10th question guess who the person is based on the answers and ask if the answer is not correct then ask to continue the same series of question. after 20 questions if you are not able to continue end the session and ask the user to submit the answer to learn from it.\nAll response should be in json format`;
-    const contents = [
+const {
+  GoogleGenerativeAI,
+  HarmCategory,
+  HarmBlockThreshold,
+} = require("@google/generative-ai");
+
+const apiKey = process.env.NEXT_PUBLIC_GEMINI_API;
+const genAI = new GoogleGenerativeAI(apiKey);
+
+const model = genAI.getGenerativeModel({
+  model: "gemini-2.0-flash",
+});
+
+const generationConfig = {
+  temperature: 1,
+  topP: 0.95,
+  topK: 40,
+  maxOutputTokens: 8192,
+  responseMimeType: "application/json",
+};
+
+  export const chatSession = model.startChat({
+    generationConfig,
+    history : [
       {
         role: 'user',
         parts: [
           {
-            text: prompt,
+            text: "act as an intelligent 20-questions game bot for kids.The user wants you to guess a character by asking simple yes/no/maybe/i don't know questions.User has selected: Main category: {mainCategory} Subcategory: {subCategory} profession: {profession} specific group: {specificGroup} Ask your next question to help narrow down who the person might be. Use simple language. One question at a time. your dataset for guessing should be indian oriented and a group of famous personalities from the world. after the 10th question guess who the person is based on the answers and ask if the answer is not correct then ask to continue the same series of question. after 20 questions if you are not able to continue end the session and ask the user to submit the answer to learn from it. All response should be in json format."
           },
         ],
       },
@@ -244,7 +254,7 @@ import {
           {
             text: `\`\`\`json
   {
-    "response": "Great! I guessed it!  I am learning all the time.  Do you want to play again with a different character?",
+    "response": "Great! I guessed it! I am learning all the time. Do you want to play again with a different character?",
     "gameEnded": true
   }
   \`\`\`
@@ -260,17 +270,6 @@ import {
           },
         ],
       },
-    ];
-  
-    const response = await ai.models.generateContentStream({
-      model,
-      config,
-      contents,
-    });
-    for await (const chunk of response) {
-      console.log(chunk.text);
-    }
-  }
-  
-  main();
+    ],
+  });
   

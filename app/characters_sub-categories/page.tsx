@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-import { useCategory } from '@/app/context/CategoryContext';
+// import { useCategory } from '@/app/context/CategoryContext';
 
 const characterSubCategories = [
   {
@@ -50,7 +50,7 @@ const characterSubCategories = [
 ];
 
 export default function CharacterSubCategories() {
-  const { selectionPath, setSelectionPath } = useCategory();
+  // const { selectionPath, setSelectionPath } = useCategory();
   return (
     <main className="min-h-screen bg-[#dfd7f5] flex items-center justify-center py-16">
       <div className="w-[75%] bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg">
@@ -69,9 +69,9 @@ export default function CharacterSubCategories() {
               <div 
                 key={category.id}
                 onClick={() => {
-                  const newPath = [...selectionPath.slice(0, 5), 'characters', category.id];
-                  setSelectionPath(newPath);
-                  console.log('Selection Path:', newPath);
+                  // const newPath = [...selectionPath.slice(0, 5), 'characters', category.id];
+                  // setSelectionPath(newPath);
+                  // console.log('Selection Path:', newPath);
                 }}
                 className={
                   `

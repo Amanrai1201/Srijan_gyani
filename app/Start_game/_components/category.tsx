@@ -5,7 +5,7 @@ import { useCategory } from '../../context/CategoryContext';
 
 const categories = [
   {
-    id: "animals",  // Changed from number to descriptive string
+    id: "animals", // Changed from number to descriptive string
     name: 'Animal',
     description: 'Guess Indian wildlife and domestic animals',
     color: 'bg-emerald-50 hover:bg-emerald-100',
@@ -46,9 +46,9 @@ export default function Category() {
             href={`${category.id}_sub-categories`} 
             key={category.id}
             onClick={() => {
-              const newPath = [...selectionPath.slice(0, 5), category.id];
-              setSelectionPath(newPath);
-              console.log('Selection Path:', newPath);
+              // const newPath = [...selectionPath.slice(0, 5), category.id];
+              // setSelectionPath(newPath);
+              // console.log('Selection Path:', newPath);
               // router.push(`game/question`);
             }}
             className={`

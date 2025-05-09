@@ -68,9 +68,10 @@ export default function AnimalSubCategories() {
           <div
             key={category.id}
             onClick={() => {
-              const newPath = [...selectionPath.slice(0, 1), category.id];
-              setSelectionPath(newPath);
-              console.log('Selection Path:', newPath);
+              const newPath = ["animal", category.id];
+              selectionPath.splice(0, 2, ...newPath);
+              setSelectionPath(selectionPath);
+              console.log('Selection Path:', selectionPath);
               router.push(`game/question`);
             }}
             className={`

@@ -54,7 +54,7 @@ export default function IndianPlayerSubCategories() {
           <div
             key={category.id}
             onClick={() => {
-              const newPath = [...selectionPath.slice(0, 2), category.id];
+              const newPath = [...selectionPath.slice(0, 3), category.id];
               setSelectionPath(newPath);
               console.log('Selection Path:', newPath);
               router.push('/game/question');
