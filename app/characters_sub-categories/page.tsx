@@ -40,13 +40,13 @@ const characterSubCategories = [
     color: 'bg-yellow-50 hover:bg-yellow-100',
     image: '/historical_figures_image.jpg'
   },
-  {
-    id: 'others',
-    name: 'Others',
-    description: 'Other interesting characters and personalities',
-    color: 'bg-red-50 hover:bg-red-100',
-    image: '/politics_image.jpg'
-  }
+  // {
+  //   id: 'others',
+  //   name: 'Others',
+  //   description: 'Other interesting characters and personalities',
+  //   color: 'bg-red-50 hover:bg-red-100',
+  //   image: '/politics_image.jpg'
+  // }
 ];
 
 export default function CharacterSubCategories() {

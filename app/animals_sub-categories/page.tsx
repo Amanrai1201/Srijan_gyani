@@ -40,13 +40,13 @@ const animalSubCategories = [
     color: 'bg-cyan-50 hover:bg-cyan-100',
     image: '/aquatic_animals_image.jpg'
   },
-  {
-    id: 'others',
-    name: 'Others',
-    description: 'Add your own animal category',
-    color: 'bg-gray-50 hover:bg-gray-100',
-    image: '/birds_image.jpg'
-  }
+  // {
+  //   id: 'others',
+  //   name: 'Others',
+  //   description: 'Add your own animal category',
+  //   color: 'bg-gray-50 hover:bg-gray-100',
+  //   image: '/birds_image.jpg'
+  // }
 ];
 
 export default function AnimalSubCategories() {
@@ -59,7 +59,7 @@ export default function AnimalSubCategories() {
           Choose Animal Category
         </h1>
         <p className="text-xl text-gray-600">
-          Select a specific animal category or create your own!
+          Select a specific animal category.
         </p>
       </div>
 

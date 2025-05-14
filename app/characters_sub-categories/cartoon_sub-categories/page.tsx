@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCategory } from '@/app/context/CategoryContext';
+import { useRouter } from 'next/navigation';
 
 const cartoonSubCategories = [
   {
@@ -18,16 +19,17 @@ const cartoonSubCategories = [
     color: 'bg-amber-50 hover:bg-amber-100',
     image: '/things_gemini.jpg'
   },
-  {
-    id: 'others',
-    name: 'Others',
-    description: 'Other sports and games',
-    color: 'bg-gray-50 hover:bg-gray-100',
-    image: '/things_gemini.jpg'
-  }
+  // {
+  //   id: 'others',
+  //   name: 'Others',
+  //   description: 'Other sports and games',
+  //   color: 'bg-gray-50 hover:bg-gray-100',
+  //   image: '/things_gemini.jpg'
+  // }
 ];
 
 export default function cartoonsubCategories() {
+  const router = useRouter();
   const { selectionPath, setSelectionPath } = useCategory();
   return (
     <div className="w-full mx-auto p-12">
@@ -45,11 +47,13 @@ export default function cartoonsubCategories() {
           <Link
             href={`cartoon_sub-categories/${category.id}_sub-categories`}
             key={category.id}
-            onClick={() => {
-              const newPath = [...selectionPath.slice(0, 5), category.id];
-              setSelectionPath(newPath);
-              console.log('Selection Path:', newPath);
-            }}
+            // onClick={() => {
+            //   const newPath = ["cartoon","indian_cartoon",category.id];
+            //   selectionPath.splice(0, 4, ...newPath);
+            //   setSelectionPath(selectionPath);
+            //   console.log('Selection Path:', selectionPath);
+            //   router.push(`game/question`);
+            // }}
             className={
               `
               ${category.color}

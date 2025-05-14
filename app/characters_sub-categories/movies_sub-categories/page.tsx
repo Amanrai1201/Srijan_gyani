@@ -1,6 +1,4 @@
 'use client';
-
-import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/navigation';
@@ -53,17 +51,14 @@ export default function MovieSubCategories() {
 
       <div className="grid md:grid-cols-3 gap-8">
         {movieSubCategories.map((category) => (
-          <Link
-            href={`/game/question`}
+          <div
             key={category.id}
             onClick={() => {
-              const newPath = [
-                ...selectionPath.slice(0, 5),
-                category.id
-              ];
-              setSelectionPath(newPath);
-              console.log('Selection Path:', newPath);
-              // router.push(`game/question`);
+              const newPath = ["movies", category.id];
+              selectionPath.splice(0, 2, ...newPath);
+              setSelectionPath(selectionPath);
+              console.log('Selection Path:', selectionPath);
+              router.push(`/game/question`);
             }}
             className={`
               ${category.color}
@@ -83,6 +78,7 @@ export default function MovieSubCategories() {
                 src={category.image}
                 alt={category.name}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover transition-transform duration-300 hover:scale-110"
                 priority
               />
@@ -93,7 +89,7 @@ export default function MovieSubCategories() {
             <p className="text-gray-600">
               {category.description}
             </p>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
