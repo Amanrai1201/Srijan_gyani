@@ -40,13 +40,13 @@ const footballSubCategories = [
     color: 'bg-indigo-50 hover:bg-indigo-100',
     image: '/things_gemini.jpg'
   },
-  {
-    id: 'others',
-    name: 'Others',
-    description: 'Other football formats and variations',
-    color: 'bg-gray-50 hover:bg-gray-100',
-    image: '/things_gemini.jpg'
-  }
+  // {
+  //   id: 'others',
+  //   name: 'Others',
+  //   description: 'Other football formats and variations',
+  //   color: 'bg-gray-50 hover:bg-gray-100',
+  //   image: '/things_gemini.jpg'
+  // }
 ];
 
 export default function FootballSubCategories() {
@@ -68,9 +68,10 @@ export default function FootballSubCategories() {
           <div
             key={category.id}
             onClick={() => {
-              const newPath = [...selectionPath.slice(0, 1), category.id];
-              setSelectionPath(newPath);
-              console.log('Selection Path:', newPath);
+              const newPath = ["character","sports","football",category.id];
+              selectionPath.splice(0, 4, ...newPath);
+              setSelectionPath(selectionPath);
+              console.log('Selection Path:', selectionPath);
               router.push('/game/question');
             }}
             className={`
@@ -90,7 +91,9 @@ export default function FootballSubCategories() {
               <Image
                 src={category.image}
                 alt={category.name}
-                fill
+                width={400}
+                height={300}
+                style={{ width: '100%', height: '100%' }}
                 className="object-cover transition-transform duration-300 hover:scale-110"
                 priority
               />

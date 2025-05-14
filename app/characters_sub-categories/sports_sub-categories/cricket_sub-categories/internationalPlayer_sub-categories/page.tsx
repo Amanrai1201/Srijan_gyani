@@ -26,13 +26,13 @@ const internationalPlayerSubCategories = [
     color: 'bg-gray-50 hover:bg-gray-100',
     image: '/things_gemini.jpg' // ✅ Added missing image
   },
-  {
-    id: 'others',
-    name: 'Others',
-    description: 'Other players',
-    color: 'bg-gray-50 hover:bg-gray-100',
-    image: '/things_gemini.jpg'
-  }
+  // {
+  //   id: 'others',
+  //   name: 'Others',
+  //   description: 'Other players',
+  //   color: 'bg-gray-50 hover:bg-gray-100',
+  //   image: '/things_gemini.jpg'
+  // }
 ];
 
 export default function InternationalPlayerSubCategories() {
@@ -54,9 +54,10 @@ const router = useRouter();
           <div
             key={category.id}
             onClick={() => {
-              const newPath = [...selectionPath.slice(0, 2), category.id];
-              setSelectionPath(newPath);
-              console.log('Selection Path:', newPath);
+              const newPath = ["character","sports","cricket","international_player",category.id];
+              selectionPath.splice(0, 4, ...newPath);
+              setSelectionPath(selectionPath);
+              console.log('Selection Path:', selectionPath);
               router.push('/game/question');
             }}
             className={`

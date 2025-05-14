@@ -52,17 +52,14 @@ export default function PoliticsSubCategories() {
 
       <div className="grid md:grid-cols-3 gap-8">
         {politicsSubCategories.map((category) => (
-          <Link
-            href={`/game/question`}
+          <div
             key={category.id}
             onClick={() => {
-              const newPath = [
-                ...selectionPath.slice(0, 5),
-                category.id
-              ];
-              setSelectionPath(newPath);
-              console.log('Selection Path:', newPath);
-              // router.push(`game/question`);
+              const newPath = ["politics", category.id];
+              selectionPath.splice(0, 2, ...newPath);
+              setSelectionPath(selectionPath);
+              console.log('Selection Path:', selectionPath);
+              router.push(`game/question`);
             }}
             className={`
               ${category.color}
@@ -81,7 +78,9 @@ export default function PoliticsSubCategories() {
               <Image
                 src={category.image}
                 alt={category.name}
-                fill
+                width={400}
+                height={300}
+                style={{ width: '100%', height: '100%' }}
                 className="object-cover transition-transform duration-300 hover:scale-110"
                 priority
               />
@@ -92,7 +91,7 @@ export default function PoliticsSubCategories() {
             <p className="text-gray-600">
               {category.description}
             </p>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

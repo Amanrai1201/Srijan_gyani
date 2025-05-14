@@ -11,43 +11,43 @@ const historicalFiguresSubCategories = [
     name: 'Freedom Fighters',
     description: 'Heroes who fought for India\'s independence',
     color: 'bg-orange-50 hover:bg-orange-100',
-    image: '/character_gemini.jpg'
+    image: '/freedom_image.jpg'
   },
   {
     id: 'ancient_rulers',
     name: 'Ancient Rulers',
     description: 'Kings, Queens and Emperors of ancient India',
     color: 'bg-amber-50 hover:bg-amber-100',
-    image: '/character_gemini.jpg'
+    image: '/ancient_ruler_image.jpg'
   },
   {
     id: 'scientists',
     name: 'Scientists',
     description: 'Notable Indian scientists and inventors',
     color: 'bg-green-50 hover:bg-green-100',
-    image: '/character_gemini.jpg'
+    image: '/science_image.jpg'
   },
   {
     id: 'social_reformers',
     name: 'Social Reformers',
     description: 'Leaders who brought social change',
     color: 'bg-blue-50 hover:bg-blue-100',
-    image: '/character_gemini.jpg'
+    image: '/social_reforms_image.jpg'
   },
   {
     id: 'military_leaders',
     name: 'Military Leaders',
     description: 'Brave military commanders and warriors',
     color: 'bg-purple-50 hover:bg-purple-100',
-    image: '/character_gemini.jpg'
+    image: '/army_image.jpg'
   },
-  {
-    id: 'others',
-    name: 'Others',
-    description: 'Other significant historical figures',
-    color: 'bg-gray-50 hover:bg-gray-100',
-    image: '/character_gemini.jpg'
-  }
+  // {
+  //   id: 'others',
+  //   name: 'Others',
+  //   description: 'Other significant historical figures',
+  //   color: 'bg-gray-50 hover:bg-gray-100',
+  //   image: '/character_gemini.jpg'
+  // }
 ];
 
 export default function HistoricalFiguresSubCategories() {
@@ -66,17 +66,14 @@ export default function HistoricalFiguresSubCategories() {
 
       <div className="grid md:grid-cols-3 gap-8">
         {historicalFiguresSubCategories.map((category) => (
-          <Link
-            href={`/game/question`}
+          <div
             key={category.id}
             onClick={() => {
-              const newPath = [
-                ...selectionPath.slice(0, 5),
-                category.id
-              ];
-              setSelectionPath(newPath);
-              console.log('Selection Path:', newPath);
-              // router.push(`game/question`);
+              const newPath = ["historical_figures", category.id];
+              selectionPath.splice(0, 2, ...newPath);
+              setSelectionPath(selectionPath);
+              console.log('Selection Path:', selectionPath);
+              router.push(`game/question`);
             }}
             className={`
               ${category.color}
@@ -106,7 +103,7 @@ export default function HistoricalFiguresSubCategories() {
             <p className="text-gray-600">
               {category.description}
             </p>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

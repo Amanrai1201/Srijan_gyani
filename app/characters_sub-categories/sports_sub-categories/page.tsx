@@ -40,13 +40,13 @@ const sportsSubCategories = [
     color: 'bg-indigo-50 hover:bg-indigo-100',
     image: '/kabbadi_image.jpg'
   },
-  {
-    id: 'others',
-    name: 'Others',
-    description: 'Other sports and games',
-    color: 'bg-gray-50 hover:bg-gray-100',
-    image: '/things_gemini.jpg'
-  }
+  // {
+  //   id: 'others',
+  //   name: 'Others',
+  //   description: 'Other sports and games',
+  //   color: 'bg-gray-50 hover:bg-gray-100',
+  //   image: '/things_gemini.jpg'
+  // }
 ];
 
 export default function SportsSubCategories() {
@@ -66,15 +66,15 @@ export default function SportsSubCategories() {
         {sportsSubCategories.map((category) => (
           <Link
             href={`sports_sub-categories/${category.id}_sub-categories`}
-            key={category.id}
-            onClick={() => {
-              const newPath = [
-                ...selectionPath.slice(0, 2),
-                category.id
-              ];
-              setSelectionPath(newPath);
-              console.log('Selection Path:', newPath);
-            }}
+            // key={category.id}
+            // onClick={() => {
+            //   const newPath = [
+            //     ...selectionPath.slice(0, 2),
+            //     category.id
+            //   ];
+            //   setSelectionPath(newPath);
+            //   console.log('Selection Path:', newPath);
+            // }}
             className={`
               ${category.color}
               p-6 rounded-2xl
