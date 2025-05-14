@@ -10,22 +10,22 @@ const cricketSubCategories = [
     name: 'indian player',
     description: 'famous indian player',
     color: 'bg-orange-50 hover:bg-orange-100',
-    image: '/things_gemini.jpg'
+    image: '/cricket_image.jpg'
   },
   {
     id: 'internationalPlayer',
     name: 'international player',
     description: 'famous international player',
     color: 'bg-amber-50 hover:bg-amber-100',
-    image: '/things_gemini.jpg'
+    image: '/cricket_image.jpg'
   },
-  {
-    id: 'others',
-    name: 'Others',
-    description: 'Other famous players',
-    color: 'bg-gray-50 hover:bg-gray-100',
-    image: '/things_gemini.jpg'
-  }
+  // {
+  //   id: 'others',
+  //   name: 'Others',
+  //   description: 'Other famous players',
+  //   color: 'bg-gray-50 hover:bg-gray-100',
+  //   image: '/things_gemini.jpg'
+  // }
 ];
 
 export default function CricketSubCategories() {
@@ -45,17 +45,7 @@ export default function CricketSubCategories() {
       <div className="grid md:grid-cols-3 gap-8">
         {cricketSubCategories.map((category) => (
                   <Link
-                  href={`/cricket_sub-categories/${category.id}_sub-categories`}
-                  key={category.id}
-                  onClick={() => {
-                    const newPath = [
-                      ...selectionPath.slice(0, 5),
-                      category.id
-                    ];
-                    setSelectionPath(newPath);
-                    console.log('Selection Path:', newPath);
-                    // router.push(`game/question`);
-                  }}
+                  href={`/characters_sub-categories/sports_sub-categories/cricket_sub-categories/${category.id}_sub-categories`}
             className={
               `
               ${category.color}

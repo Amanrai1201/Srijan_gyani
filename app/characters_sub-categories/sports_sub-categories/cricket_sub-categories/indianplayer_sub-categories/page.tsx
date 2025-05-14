@@ -17,22 +17,22 @@ const indianPlayerSubCategories = [
     name: 'Bowlers',
     description: 'Any famous bowlers from current or older team',
     color: 'bg-amber-50 hover:bg-amber-100',
-    image: '/bowlers.jpg'
+    image: '/bowler_image.jpg'
   },
   {
     id: 'All-rounders',
     name: 'All-rounders',
     description: 'Any famous all-rounders from current or older team',
     color: 'bg-gray-50 hover:bg-gray-100',
-    image: '/all_rounders' // ✅ Added missing image
+    image: '/all_rounder_image.jpg' // ✅ Added missing image
   },
-  {
-    id: 'others',
-    name: 'Others',
-    description: 'Other players',
-    color: 'bg-gray-50 hover:bg-gray-100',
-    image: '/things_gemini.jpg'
-  }
+  // {
+  //   id: 'others',
+  //   name: 'Others',
+  //   description: 'Other players',
+  //   color: 'bg-gray-50 hover:bg-gray-100',
+  //   image: '/things_gemini.jpg'
+  // }
 ];
 
 export default function IndianPlayerSubCategories() {
@@ -54,9 +54,10 @@ export default function IndianPlayerSubCategories() {
           <div
             key={category.id}
             onClick={() => {
-              const newPath = [...selectionPath.slice(0, 3), category.id];
-              setSelectionPath(newPath);
-              console.log('Selection Path:', newPath);
+              const newPath = ["character","sports","cricket","indian_player",category.id];
+              selectionPath.splice(0, 4, ...newPath);
+              setSelectionPath(selectionPath);
+              console.log('Selection Path:', selectionPath);
               router.push('/game/question');
             }}
             className={

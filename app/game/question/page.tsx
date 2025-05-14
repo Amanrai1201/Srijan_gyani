@@ -14,6 +14,7 @@ export default function QuestionPage(passdata: {prediction: any}) {
   const [loading, setLoading] = useState(false);
   const [conversationHistory, setConversationHistory] = useState<string[]>([]);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const options = [
     { text: 'Yes', subtext: 'I agree', color: 'bg-blue-50 hover:bg-blue-100' },
@@ -52,6 +53,7 @@ export default function QuestionPage(passdata: {prediction: any}) {
         updatedAnswers.push(answer);
         setConversationHistory(updatedHistory);
         setUserAnswers(updatedAnswers);
+        setCurrentQuestionIndex(prev => prev + 1);
       }
 
       const historyString = updatedHistory
@@ -70,7 +72,7 @@ export default function QuestionPage(passdata: {prediction: any}) {
       } else if (typeof result?.response === "string") {
         responseText = result.response;
       } else {
-        console.warn("Unexpected Gemini response:", result);
+        console.warn("Unexpected response:", result);
         responseText = JSON.stringify(result);
       }
 
@@ -91,12 +93,12 @@ export default function QuestionPage(passdata: {prediction: any}) {
         }
         
       } catch (err) {
-        console.warn("Failed to parse JSON from Gemini:", err);
+        console.warn("Failed to parse JSON :", err);
         setGeminiResponse(responseText); // fallback raw
       }
     } catch (error) {
       console.error("Error communicating with Gemini:", error);
-      setGeminiResponse("Error fetching Gemini response.");
+      setGeminiResponse("Error fetchingresponse.");
     } finally {
       setLoading(false);
     }
@@ -111,17 +113,43 @@ export default function QuestionPage(passdata: {prediction: any}) {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <div className="w-[65vw] bg-white rounded-3xl shadow-xl p-8">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-gray-800 mb-6">
-            {loading ? 'Loading Gemini response...' : (geminiResponse ?? 'Are you Ready to Start..')}
+      <div className="w-full md:w-[65vw] bg-white rounded-3xl shadow-xl p-4 md:p-8">
+        <div className="text-center mb-8 md:mb-12">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-6">
+            {loading ? 'Thinking...' : (geminiResponse ?? 'Are you Ready to Start..')}
           </h1>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 text-base md:text-lg">
             Please select one of the options below
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="flex justify-center mb-6">
+          <button
+            className={`
+              bg-gray-100 hover:bg-gray-200
+              px-6 py-3 rounded-xl
+              transition-all duration-200
+              transform hover:scale-105
+              flex items-center justify-center
+              border-2 border-transparent hover:border-gray-300
+              ${currentQuestionIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}
+            `}
+            onClick={() => {
+              if (currentQuestionIndex > 0) {
+                const newIndex = currentQuestionIndex - 1;
+                setCurrentQuestionIndex(newIndex);
+                setConversationHistory(prev => prev.slice(0, newIndex));
+                setUserAnswers(prev => prev.slice(0, newIndex));
+                setGeminiResponse(conversationHistory[newIndex - 1] || null);
+              }
+            }}
+            disabled={currentQuestionIndex === 0}
+          >
+            <span className="text-lg font-semibold text-gray-700">← Previous Question</span>
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
           {options.map((option) => (
             <button
               key={option.text}

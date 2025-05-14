@@ -40,13 +40,13 @@ const kabaddiSubCategories = [
     color: 'bg-indigo-50 hover:bg-indigo-100',
     image: '/things_gemini.jpg'
   },
-  {
-    id: 'others',
-    name: 'Others',
-    description: 'Other Kabaddi formats and variations',
-    color: 'bg-gray-50 hover:bg-gray-100',
-    image: '/things_gemini.jpg'
-  }
+  // {
+  //   id: 'others',
+  //   name: 'Others',
+  //   description: 'Other Kabaddi formats and variations',
+  //   color: 'bg-gray-50 hover:bg-gray-100',
+  //   image: '/things_gemini.jpg'
+  // }
 ];
 
 export default function KabaddiSubCategories() {
@@ -68,9 +68,10 @@ export default function KabaddiSubCategories() {
           <div
             key={category.id}
             onClick={() => {
-              const newPath = [...selectionPath.slice(0, 1), category.id];
-              setSelectionPath(newPath);
-              console.log('Selection Path:', newPath);
+              const newPath = ["character","sports","kabaddi",category.id];
+              selectionPath.splice(0, 4, ...newPath);
+              setSelectionPath(selectionPath);
+              console.log('Selection Path:', selectionPath);
             router.push('/game/question');
             }}
             className={`
