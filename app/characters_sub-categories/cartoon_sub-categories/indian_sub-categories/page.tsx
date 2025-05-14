@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/navigation';
@@ -20,39 +19,39 @@ const indianSubCategories = [
     color: 'bg-amber-50 hover:bg-amber-100',
     image: '/things_gemini.jpg'
   },
-  {
-    id: 'others',
-    name: 'Others',
-    description: 'Other sports and games',
-    color: 'bg-gray-50 hover:bg-gray-100',
-    image: '/things_gemini.jpg'
-  }
+  // {
+  //   id: 'others',
+  //   name: 'Others',
+  //   description: 'Other sports and games',
+  //   color: 'bg-gray-50 hover:bg-gray-100',
+  //   image: '/things_gemini.jpg'
+  // }
 ];
 
-export default function indiansubCategories() {
+export default function IndianSubCategories() {
   const router = useRouter();
   const { selectionPath, setSelectionPath } = useCategory();
   return (
     <div className="w-full mx-auto p-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">
-          Choose Sports Category
+          Choose Indian Cartoon Category
         </h1>
         <p className="text-xl text-gray-600">
-          Select a specific sports category or create your own!
+          Select a specific Indian cartoon category!
         </p>
       </div>
 
       <div className="grid md:grid-cols-3 gap-8">
-        {indianSubCategories.map((category, idx) => (
-          <Link
-            href={`\game\question`}
+         {indianSubCategories.map((category) => (
+          <div
             key={category.id}
             onClick={() => {
-              const newPath = [...selectionPath.slice(0, 5), category.id];
-              setSelectionPath(newPath);
-              console.log('Selection Path:', newPath);
-              // router.push(`game/question`);
+              const newPath = ["cartoon","indian_cartoon" ,category.id];
+              selectionPath.splice(0, 4, ...newPath);
+              setSelectionPath(selectionPath);
+              console.log('Selection Path:', selectionPath);
+              router.push('/game/question');
             }}
             className={
               `
@@ -73,7 +72,9 @@ export default function indiansubCategories() {
               <Image
                 src={category.image}
                 alt={category.name}
-                fill
+                width={400}
+                height={300}
+                style={{ width: '100%', height: '100%' }}
                 className="object-cover transition-transform duration-300 hover:scale-110"
                 priority
               />
@@ -84,7 +85,7 @@ export default function indiansubCategories() {
             <p className="text-gray-600">
               {category.description}
             </p>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
